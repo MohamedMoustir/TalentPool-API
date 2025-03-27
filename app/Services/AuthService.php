@@ -33,7 +33,7 @@ class AuthService
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $token = JWTAuth::fromUser($user);
-
+         
             return [
                 'user' => $user,
                 'token' => $token
@@ -55,19 +55,15 @@ class AuthService
     {
         try {
             $token = JWTAuth::getToken();
-
             if (!$token) {
                 return null;
             }
-
             $user = JWTAuth::toUser($token);
 
             if (!$user) {
                 return null;
             }
-
             $user->tokens()->delete();
-
             $newToken = $user->createToken('auth_token')->plainTextToken;
 
             return [

@@ -66,6 +66,23 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 
+    public function isRecruteur()
+    {
+        return $this->role === 'recruteur';
+    }
+
+public function annonces()
+{
+    return $this->hasMany(Annonce::class);
+}
+public function candidatures()
+{
+    return $this->hasMany(Candidature::class);
+}
 
 }

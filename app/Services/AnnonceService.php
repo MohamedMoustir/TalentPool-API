@@ -36,4 +36,6 @@ class AnnonceService
         $annonce = Annonce::findOrFail($id);
         $annonce->delete();
     }
+
+    
 }
